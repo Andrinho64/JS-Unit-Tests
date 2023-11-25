@@ -44,13 +44,58 @@ Retorno:
 
 describe('9 - Implemente os casos de teste da função `getCharacter`', () => {
   it('Verifica se a função `getCharacter` retorna o objeto do personagem corretamente.', () => {
-    fail('Teste vazio!');
-    // ESCREVA SEUS TESTES ABAIXO:
-    // 1. Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
-    // 2. Teste se a função retorna o objeto correto para o parâmetro 'Arya',
-    // 3. Teste se a função retorna o objeto correto para o parâmetro 'Brienne',
-    // 4. Teste se a função retorna o objeto correto para o parâmetro 'Melissandre',
-    // 5. Teste se o parâmetro não é Case Sensitive, ou seja, independente de conter letras maiúsculas ou minúsculas retorna o mesmo objeto relativo a ele.
-    // 6. Teste se ao passar um nome que não está na tabela, a função retorna undefined.
+    const result = getCharacter();
+    expect(result).toBeUndefined();
+  });
+
+  it('Testa se a função `getCharacter` retorna o objeto correto para o parâmetro "Arya".', () => {
+    const result = getCharacter('Arya');
+    const expected = {
+      name: 'Arya Stark',
+      class: 'Rogue',
+      phrases: ['Not today', 'A girl has no name.']
+    };
+    expect(result).toEqual(expected);
+  });
+
+  it('Testa se a função `getCharacter` retorna o objeto correto para o parâmetro "Brienne".', () => {
+    const result = getCharacter('Brienne');
+    const expected = {
+      name: 'Brienne Tarth',
+      class: 'Knight',
+      phrases: ['Im No Lady, Your Grace.', 'I, Brienne Of Tarth, Sentence You To Die.']
+    };
+    expect(result).toEqual(expected);
+  });
+
+  it('Testa se a função `getCharacter` retorna o objeto correto para o parâmetro "Melissandre".', () => {
+    const result = getCharacter('Melissandre');
+    const expected = {
+      name: 'Melissandre',
+      class: 'Necromancer',
+      phrases: ['Death By Fire Is The Purest Death.', 'For The Night Is Dark And Full Of Terrors.']
+    };
+    expect(result).toEqual(expected);
+  });
+
+  it('Testa se o parâmetro é case insensitive (letras maiúsculas ou minúsculas não fazem diferença).', () => {
+    const resultUpper = getCharacter('ARYA');
+    const resultMixed = getCharacter('ArYa');
+    const resultLower = getCharacter('arya');
+
+    const expected = {
+      name: 'Arya Stark',
+      class: 'Rogue',
+      phrases: ['Not today', 'A girl has no name.']
+    };
+
+    expect(resultUpper).toEqual(expected);
+    expect(resultMixed).toEqual(expected);
+    expect(resultLower).toEqual(expected);
+  });
+
+  it('Testa se ao passar um nome que não está na tabela, a função retorna undefined.', () => {
+    const result = getCharacter('Tyrion');
+    expect(result).toBeUndefined();
   });
 });
